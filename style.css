@@ -1,0 +1,598 @@
+/* =========================
+   RESET & VARIÁVEIS
+========================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+:root {
+    --primary-color: #4f46e5;
+    --secondary-color: #7c3aed; 
+    --dark: #0f172a;
+    --darker: #0a0f1c;
+    --light: #e2e8f0;
+    --vidro: rgba(255, 255, 255, 0.1);
+}
+
+/* =========================
+   ESTRUTURA GERAL
+========================= */
+body {
+    background-color: var(--dark);
+    color: var(--light);
+}
+
+/* =========================
+   NAVEGAÇÃO
+========================= */
+.navegacao {
+    position: fixed;
+    top: 0;
+    background: rgba(15, 23, 42, 0.8);
+    width: 100%;
+    z-index: 100;
+    padding: 1.5rem;
+}
+
+.menu {
+    display: flex;
+    list-style: none;
+    gap: 3rem;
+    justify-content: center;
+}
+
+.menu-link {
+    text-decoration: none;
+    color: var(--light);
+    font-weight: 500;
+    position: relative;
+    padding: 0.5rem 0;
+    transition: transform 0.3s;
+    font-size: 1.2rem;
+}
+
+.menu-link::after {
+    content: '';
+    height: 2px;
+    width: 0%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    transition: width 0.5s ease;
+}
+
+.menu-link:hover::after {
+    width: 100%;
+}
+
+.menu-link:hover {
+    color: var(--primary-color);
+    transform: scale(1.05);
+}
+
+/* =========================
+   CABEÇALHO
+========================= */
+.cabecalho {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    animation: aparecer 1s ease-out forwards;
+}
+
+.foto-perfil {
+    width: 420px;
+    height: 420px;
+    box-shadow: 0 0 20px rgba(79, 70, 229, 0.3);
+    border-radius: 50%;
+    border: 4px solid var(--vidro);
+    animation: flutuar 5s ease-in-out infinite;
+}
+
+h1 {
+    font-size: 3rem;
+    color: var(--primary-color);
+    font-weight: bold;
+    margin: 20px;
+}
+
+.cabecalho-subtitulo {
+    font-size: 1.25rem;
+    color: var(--light);
+}
+
+/* =========================
+   TÍTULOS DAS SECÇÕES
+========================= */
+.sobre-titulo,
+.projetos-titulo,
+.contactos-titulo {
+    font-size: 2rem;
+    color: var(--light);
+    text-align: center;
+    margin-bottom: 50px;
+    letter-spacing: 1px;
+}
+
+/* =========================
+   PARÁGRAFOS E TEXTOS
+========================= */
+.sobre-paragrafo,
+.paragrafo-projetos,
+.contactos-texto {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--light);
+    opacity: 0.92;
+}
+
+.info-projetos {
+    font-size: 1.15rem;
+    margin-bottom: 5px;
+}
+
+/* =========================
+   SCROLL DOWN SETA
+========================= */
+.scroll-down {
+    display: block;
+    margin: 2rem auto 0 auto;
+    font-size: 2rem;
+    animation: pulso 2s infinite;
+    color: var(--primary-color);
+    text-align: center;
+    width: fit-content;
+    transition: color 0.2s, transform 0.2s;
+    cursor: pointer;
+}
+
+.scroll-down:hover {
+    color: var(--secondary-color);
+    transform: translateY(6px) scale(1.2);
+}
+
+/* =========================
+   SECÇÃO SOBRE
+========================= */
+.sobre {
+    padding: 6rem 2rem;
+}
+
+.sobre-conteudo {
+    padding: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+    border-radius: 16px;
+    border: 1px solid var(--vidro);
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* =========================
+   SECÇÃO PROJETOS
+========================= */
+.projetos {
+    padding: 6rem 2rem;
+}
+
+.projetos-caixa {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.projetos-card {
+    display: flex;
+    flex-direction: column;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    backdrop-filter: blur(5px);
+    border: 1px solid var(--vidro);
+    overflow: hidden;
+    transition: all 0.5s ease;
+    cursor: pointer;
+}
+
+.projetos-card:hover {
+    box-shadow: 0 10px 20px rgba(79, 70, 229, 0.2);
+    transform: translateY(-10px) scale(1.03);
+}
+
+.projetos-imagem {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    aspect-ratio: 16 / 9;
+}
+
+.caixa-texto-projeto {
+    padding: 1.5rem;
+}
+
+.paragrafos-projetos {
+    color: rgba(226, 232, 240, 0.8);
+    line-height: 1.25rem;
+}
+
+/* =========================
+   PARTICULAS DE FUNDO
+========================= */
+.particulas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: 0.5;
+    background: 
+        radial-gradient(circle at 10% 20%, var(--primary-color) 0%, transparent 20%),
+        radial-gradient(circle at 90% 80%, var(--secondary-color) 0%, transparent 20%),
+        var(--darker);
+}
+
+/* =========================
+   MODAL PROJETOS
+========================= */
+@keyframes flutuar {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 200;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.85);
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    overflow: auto;
+}
+
+.modal-aberto {
+    display: flex;
+}
+
+.modal-imagem {
+    max-width: 90vw;
+    max-height: 70vh;
+    border-radius: 12px;
+    box-shadow: 0 0 30px rgba(79, 70, 229, 0.4);
+    margin-bottom: 1.5rem;
+    background: #fff;
+    object-fit: contain;
+}
+
+.modal-descricao {
+    color: var(--light);
+    background: rgba(15, 23, 42, 0.7);
+    padding: 1.2rem 2rem;
+    border-radius: 10px;
+    max-width: 80vw;
+    text-align: center;
+    font-size: 1.1rem;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    margin-bottom: 1rem;
+}
+
+.modal-fechar {
+    color: #fff;
+    position: absolute;
+    top: 24px;
+    right: 40px;
+    font-size: 2.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 201;
+    transition: color 0.2s;
+    user-select: none;
+    line-height: 1;
+    background: none;
+    border: none;
+    outline: none;
+}
+
+.modal-fechar:hover {
+    color: var(--primary-color);
+}
+
+/* =========================
+   ANIMAÇÕES
+========================= */
+@keyframes aparecer {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulso {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(8px); }
+}
+
+/* =========================
+   SECÇÕES GERAIS
+========================= */
+section {
+    min-height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 100px;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: aparecer 1s forwards;
+    animation-delay: 0.3s;
+}
+
+#sobre, #projetos {
+    padding-top: 100px; 
+}
+
+/* =========================
+   SECÇÃO CONTACTOS
+========================= */
+.contactos {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(
+        180deg,
+        rgba(15, 23, 42, 0.0) 0%,
+        rgba(15, 23, 42, 0.85) 35%,
+        rgba(10, 15, 28, 1) 100%
+    );
+    padding: 6rem 2rem 3rem 2rem;
+}
+
+.contactos-titulo {
+    color: var(--light);
+    font-size: 2.5rem;
+    margin-bottom: 2.5rem;
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+.contactos-links {
+    display: flex;
+    gap: 2.5rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.contacto-icone {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid var(--vidro);
+    transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+    box-shadow: 0 2px 12px rgba(79, 70, 229, 0.08);
+    text-decoration: none;
+    color: var(--light);
+}
+
+.contacto-icone:hover {
+    transform: scale(1.13) translateY(-4px);
+    background: rgba(79,70,229,0.12);
+    box-shadow: 0 4px 24px rgba(79, 70, 229, 0.18);
+    border-color: var(--primary-color);
+}
+
+.contacto-icone img {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+    display: block;
+    transition: filter 0.2s;
+}
+
+.contactos-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--vidro);
+    backdrop-filter: blur(12px);
+    padding: 3rem 2rem;
+    border-radius: 24px;
+    box-shadow: 0 4px 20px rgba(79, 70, 229, 0.15);
+    text-align: center;
+    max-width: 600px;
+    width: 90%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contactos-card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 6px 32px rgba(124, 58, 237, 0.25);
+}
+
+.contactos-texto {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    color: var(--light);
+    opacity: 0.85;
+}
+
+/* =========================
+   BOTÃO TOPO
+========================= */
+.btn-topo {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: var(--primary-color);
+    color: white;
+    padding: 0.7rem 1rem;
+    border-radius: 10px;
+    text-decoration: none;
+    font-size: 1.2rem;
+    box-shadow: 0 2px 10px rgba(79, 70, 229, 0.3);
+    transition: background 0.3s ease;
+    z-index: 150;
+}
+
+.btn-topo:hover {
+    background: var(--secondary-color);
+}
+
+/* =========================
+   BADGES LINGUAGENS
+========================= */
+.badges-linguagens {
+    margin: 0.5rem 0 0.7rem 0;
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.badge {
+    display: inline-block;
+    padding: 0.2em 0.7em;
+    border-radius: 12px;
+    font-size: 0.85em;
+    font-weight: 600;
+    color: #fff;
+    background: #4f46e5;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    letter-spacing: 0.5px;
+}
+
+.badge-java { background: #e76f00; }
+.badge-scala { background: #c22d40; }
+.badge-python { background: #3572A5; }
+
+.titulo-linguagem {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    margin-bottom: 0.5rem;
+}
+
+.titulo-linguagem .info-projetos {
+    margin-bottom: 0;
+}
+
+/* =========================
+   MEDIA QUERIES
+========================= */
+@media (max-width: 1100px) {
+    .menu {
+        gap: 1.5rem;
+    }
+    .cabecalho {
+        padding: 2rem 0;
+    }
+    .foto-perfil {
+        width: 180px;
+        height: 180px;
+    }
+    .projetos-card {
+        max-width: 350px;
+        width: 100%;
+    }
+    .projetos-caixa {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .projetos-caixa > .projetos-card:nth-last-child(1):nth-child(odd) {
+        grid-column: 1 / -1;
+        justify-self: center;
+    }
+    .contactos-links {
+        gap: 1.2rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .navegacao {
+        padding: 1rem 0.5rem;
+    }
+    .menu-link {
+        font-size: 1rem;
+    }
+    h1 {
+        font-size: 1.5rem;
+    }
+    .sobre-titulo,
+    .projetos-titulo,
+    .contactos-titulo {
+        font-size: 1.4rem;
+    }
+    .cabecalho-subtitulo {
+        font-size: 1rem;
+    }
+    .sobre-paragrafo,
+    .paragrafo-projetos,
+    .contactos-texto {
+        font-size: 0.95rem;
+    }
+    .info-projetos {
+        font-size: 1rem;
+    }
+    .foto-perfil {
+        width: 110px;
+        height: 110px;
+    }
+    .projetos-card,
+    .contactos-card {
+        padding: 1.2rem 0.7rem;
+    }
+    .contactos-links {
+        gap: 1rem;
+    }
+    .projetos-caixa {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        max-width: 100vw;
+        padding: 0;
+    }
+    .projetos-card {
+        display: flex;
+        flex-direction: column;
+        padding: 1rem 0.5rem;
+        border-radius: 14px;
+        margin: 0 0.5rem;
+    }
+    .projetos-card:hover {
+        transform: translateY(-4px) scale(1.01);
+        box-shadow: 0 4px 12px rgba(79, 70, 229, 0.22);
+        z-index: 1;
+    }
+    .projetos-imagem {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+        border-radius: 10px 10px 0 0;
+        display: block;
+    }
+    .caixa-texto-projeto {
+        padding: 1rem 0.5rem;
+    }
+    .contacto-icone {
+        width: 38px;
+        height: 38px;
+    }
+    .contacto-icone img {
+        width: 22px;
+        height: 22px;
+    }
+}
