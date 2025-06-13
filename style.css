@@ -570,7 +570,6 @@ section {
         flex-direction: column;
         padding: 1rem 0.5rem;
         border-radius: 14px;
-        margin: 0 0.5rem;
     }
     .projetos-card:hover {
         transform: translateY(-4px) scale(1.01);
